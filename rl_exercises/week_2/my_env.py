@@ -123,7 +123,7 @@ class MyEnv(gym.Env):
         a_used = action if follow else 1 - action
 
         delta = -1 if a_used == 0 else 1
-        next_state = max(0, min(self.states[-1], self.state + delta))
+        next_state = int(max(0, min(self.states[-1], self.state + delta)))
 
         reward = float(self.rewards[self.state])
         terminated = False
