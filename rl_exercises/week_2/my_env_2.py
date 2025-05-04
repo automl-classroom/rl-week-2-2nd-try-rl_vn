@@ -185,10 +185,15 @@ class MyEnv(gym.Env):
 
 
 class PartialObsWrapper(gym.Wrapper):
-
     metadata = {"render_modes": ["human"]}
 
-    def __init__(self, env: gym.Env, noise: float = 0.1, decay: float = 0.01, seed: int | None = None):
+    def __init__(
+        self,
+        env: gym.Env,
+        noise: float = 0.1,
+        decay: float = 0.01,
+        seed: int | None = None,
+    ):
         """
         Parameters
         ----------
@@ -211,14 +216,14 @@ class PartialObsWrapper(gym.Wrapper):
         self.observation_space = env.observation_space
         self.action_space = env.action_space
 
-    def reset(self, *, seed: int | None = None, options: dict | None = None) -> tuple[int, dict[str, Any]]:
-        
+    def reset(
+        self, *, seed: int | None = None, options: dict | None = None
+    ) -> tuple[int, dict[str, Any]]:
         self.timestep = 0  # reset the step count at the beginning of each episode
         true_obs, info = self.env.reset(seed=seed, options=options)
         return self._noisy_obs(true_obs), info
 
     def step(self, action: int) -> tuple[int, float, bool, bool, dict[str, Any]]:
-       
         self.timestep += 1
         true_obs, reward, terminated, truncated, info = self.env.step(action)
         return self._noisy_obs(true_obs), reward, terminated, truncated, info

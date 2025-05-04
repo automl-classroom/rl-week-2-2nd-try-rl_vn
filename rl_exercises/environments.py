@@ -39,7 +39,7 @@ class MarsRover(gym.Env):
 
     def __init__(
         self,
-        transition_probabilities: np.ndarray = np.ones((2, 2)),
+        transition_probabilities: np.ndarray = np.ones((5, 2)),
         rewards: list[float] = [1, 0, 0, 0, 10],
         horizon: int = 10,
         seed: int | None = None,
