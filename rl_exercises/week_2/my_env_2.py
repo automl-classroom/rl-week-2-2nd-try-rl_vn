@@ -227,7 +227,7 @@ class PartialObsWrapper(gym.Wrapper):
         """
         Compute noise at the current timestep using exponential decay.
         """
-        return self.initial_noise * np.exp(-self.decay * self.timestep)
+        return self.noise * np.exp(-self.decay * self.timestep)
 
     def _noisy_obs(self, true_obs: int) -> int:
         """
